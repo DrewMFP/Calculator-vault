@@ -1,5 +1,0 @@
-<resources>
-    <string name="app_name">Calculator</string>
-    <string name="vault_unlocked">Vault Unlocked</string>
-    <string name="notification_channel_name">Vault Notifications</string>
-</resources>
