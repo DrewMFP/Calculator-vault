@@ -29,6 +29,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x CalculatorVault/gradlew
 
+    - name: Fix line endings on gradlew
+      run: sed -i 's/\r$//' CalculatorVault/gradlew
+
     - name: Build with Gradle
       working-directory: CalculatorVault
       run: ./gradlew assembleDebug
