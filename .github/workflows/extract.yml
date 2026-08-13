@@ -1,0 +1,27 @@
+steps:
+- uses: actions/checkout@v4
+  with:
+    fetch-depth: 0
+
+- name: Configure git
+  run: |
+    git config user.name "github-actions[bot]"
+    git config user.email "github-actions[bot]@users.noreply.github.com"
+
+- name: Unzip CalculatorVault_fixed.zip
+  run: |
+    if [ -f CalculatorVault_fixed.zip ]; then
+      mkdir -p extracted
+      unzip -o CalculatorVault_fixed.zip -d extracted
+    else
+      echo "CalculatorVault_fixed.zip not found in the repository root" && exit 1
+    fi
+
+- name: Create branch and push extracted files
+  env:
+    BRANCH: extracted/calculatorvault
+  run: |
+    git checkout -b "${BRANCH}"
+    git add extracted
+    git commit -m "Extract CalculatorVault_fixed.zip into ${BRANCH}" || echo "No changes to commit"
+    git push --set-upstream origin "${BRANCH}"
